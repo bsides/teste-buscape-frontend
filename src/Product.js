@@ -13,11 +13,19 @@ class Product extends Component {
     })
   }
   state = {
-    selected: ''
+    selected: {}
   }
   sendToCart = e => {
     e.preventDefault()
     this.props.addToCart(this.props.product)
+  }
+  selectImage = e => {
+    e.preventDefault()
+    const selected = {
+      src: e.target.src,
+      alt: e.target.alt
+    }
+    this.setState({ selected })
   }
   render() {
     const { images, name, price, id } = this.props.product
@@ -25,17 +33,25 @@ class Product extends Component {
       <form onSubmit={this.sendToCart}>
         <div className="row">
           <div className="col">
-            {images.map((image, index) => {
-              return <ProductImage image={image} alt={name} key={`i${index}`} />
-            })}
+            {images.map((image, index) => (
+              <ProductImage
+                image={image}
+                alt={name}
+                selectImage={this.selectImage}
+                key={`i${index}`}
+              />
+            ))}
           </div>
-          {this.state.selected && (
-            <div className="col">
-              <div className="image-selected">
-                <img src={this.state.selected} />
-              </div>
+
+          <div className="col">
+            <div className="image-selected">
+              <img
+                src={this.state.selected.src || images[0]}
+                alt={this.state.selected.alt || name}
+              />
             </div>
-          )}
+          </div>
+
           <div className="col">
             <div className="title">{name}</div>
             <div className="best-offer">Melhor preço</div>
@@ -67,11 +83,14 @@ class Product extends Component {
   }
 }
 
-const ProductImage = ({ image }) => {
+ProductImage.propTypes = {
+  image: string
+}
+function ProductImage({ image, alt, selectImage }) {
   return (
-    <div className="mini">
-      <Img className="img-fluid img-thumbnail" src={image} alt="Miniatura" />
-    </div>
+    <button className="mini" type="button" onClick={selectImage}>
+      <Img className="img-fluid img-thumbnail" src={image} alt={alt} />
+    </button>
   )
 }
 
