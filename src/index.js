@@ -1,10 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import './index.css'
-import App from './App'
+
+import Buscape from './Buscape'
+
+import './styles/index.scss'
 import registerServiceWorker from './registerServiceWorker'
 
-document.title = 'Teste Buscapé Frontend'
-
-ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.render(<Buscape />, document.getElementById('root'))
 registerServiceWorker()
