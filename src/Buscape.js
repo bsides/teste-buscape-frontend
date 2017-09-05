@@ -2,14 +2,14 @@ import React, { Component } from 'react'
 
 import Header from './Header'
 
-import './App.css'
+import './styles/Buscape.scss'
 
-class App extends Component {
+class Buscape extends Component {
   render() {
     return (
-      <div className="App">
+      <div>
         <Header />
-        <p className="App-intro">
+        <p>
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
       </div>
@@ -17,4 +17,4 @@ class App extends Component {
   }
 }
 
-export default App
+export default Buscape
