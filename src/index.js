@@ -1,8 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import App from './App'
-import './index.css'
+
+import Buscape from './Buscape'
+
+import './styles/index.scss'
 import registerServiceWorker from './registerServiceWorker'
 
-ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.render(<Buscape />, document.getElementById('root'))
 registerServiceWorker()
