@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Buscape from './Buscape'
-import asyncFetch from './helpers/asyncFetch'
+import asyncFetch from './helpers/helpers'
 import helpers from './helpers/helpers'
 import fetchMock from 'fetch-mock'
 
