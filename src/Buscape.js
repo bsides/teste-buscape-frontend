@@ -7,7 +7,7 @@ import './styles/Buscape.scss'
 class Buscape extends Component {
   render() {
     return (
-      <div>
+      <div className="container">
         <Header />
         <p>
           To get started, edit <code>src/App.js</code> and save to reload.
