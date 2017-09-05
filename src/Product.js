@@ -31,18 +31,18 @@ class Product extends Component {
     const { images, name, price, id } = this.props.product
     return (
       <form onSubmit={this.sendToCart}>
-        <div className="row">
+        <div className="row product bg-white">
           <div className="col">
             {images.map((image, index) => (
               <ProductImage
                 image={image}
                 alt={name}
                 selectImage={this.selectImage}
+                isSelected={this.state.selected.src === image}
                 key={`i${index}`}
               />
             ))}
           </div>
-
           <div className="col">
             <div className="image-selected">
               <img
@@ -51,27 +51,37 @@ class Product extends Component {
               />
             </div>
           </div>
-
           <div className="col">
             <div className="title">{name}</div>
-            <div className="best-offer">Melhor preço</div>
+            <div className="best-offer">
+              <span className="badge badge-primary">Melhor preço</span>
+            </div>
             <div className="row">
               <div className="col">
                 <span className="price installments">
                   {price.installments}x
                 </span>
                 <span className="price currency"> R$ </span>
-                <span className="prince installment">
-                  {price.installmentValue}
+                <span className="price installment">
+                  {new Intl.NumberFormat('pt-BR', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                  }).format(price.installmentValue)}
                 </span>
                 <div>
-                  ou <span>R$ </span>
-                  <span>{price.value}</span> à vista
+                  ou <span className="price">R$ </span>
+                  <span className="price value">
+                    {new Intl.NumberFormat('pt-BR', {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2
+                    }).format(price.value)}
+                  </span>{' '}
+                  à vista
                 </div>
               </div>
               <div className="col">
                 <input type="hidden" value={id} />
-                <button type="submit" className="btn">
+                <button type="submit" className="btn btn-success">
                   Adicionar ao carrinho >
                 </button>
               </div>
@@ -86,10 +96,14 @@ class Product extends Component {
 ProductImage.propTypes = {
   image: string
 }
-function ProductImage({ image, alt, selectImage }) {
+function ProductImage({ image, alt, selectImage, isSelected }) {
   return (
-    <button className="mini" type="button" onClick={selectImage}>
-      <Img className="img-fluid img-thumbnail" src={image} alt={alt} />
+    <button
+      className={`mini img-thumbnail${isSelected ? ' highlight' : ''}`}
+      type="button"
+      onClick={selectImage}
+    >
+      <Img className="img-fluid" src={image} alt={alt} />
     </button>
   )
 }
