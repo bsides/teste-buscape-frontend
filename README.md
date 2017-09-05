@@ -24,3 +24,7 @@
 ## Uso
 * React (CRA)
 * Router
+* Bootstrap
+
+## Notas
+* O layout foi feito baseado no preview do PSD passado
