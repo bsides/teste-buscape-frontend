@@ -1,5 +1,5 @@
 // Bootstrap variables
-$enable-rounded: false;
+// $enable-rounded: false;
 $yellow: #ffcd00; // header
 $green: #22b14c; // "Buscar" button
 $blue: #1990df; // "Melhor preço" label
@@ -35,5 +35,28 @@ $body-bg: #f2f2f2;
 .mini {
   max-width: 100px;
   max-height: 100px;
+  height: 100px;
+  width: 100px;
+  background: transparent;
   display: block;
+  margin: 0 0 0.4rem;
+
+  &.hightlight {
+    border-color: $yellow;
+  }
+  img {
+    max-width: 80%;
+    max-height: 80%;
+  }
+}
+.img-thumbnail {
+  background: transparent;
+  border-color: #f2f2f2;
+  border-width: 2px;
+}
+.badge {
+  text-transform: uppercase;
+}
+.price {
+  color: $green;
 }

@@ -5,13 +5,15 @@ import logo from './images/buscape.png'
 
 const Header = () => {
   return (
-    <header>
-      <nav className="navbar navbar-light bg-yellow justify-content-between">
-        <a className="navbar-brand">
-          <img alt="Buscapé logo" srcSet={logosvg} src={logo} />
-        </a>
-        <button type="button">menu</button>
-      </nav>
+    <header className="bg-yellow">
+      <div className="container">
+        <nav className="navbar navbar-light bg-yellow justify-content-between">
+          <a className="navbar-brand">
+            <img alt="Buscapé logo" srcSet={logosvg} src={logo} />
+          </a>
+          <button type="button">menu</button>
+        </nav>
+      </div>
     </header>
   )
 }
