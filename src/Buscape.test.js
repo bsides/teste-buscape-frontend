@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import App from './App'
+import Buscape from './Buscape'
 import asyncFetch from './helpers/asyncFetch'
 import helpers from './helpers/helpers'
 import fetchMock from 'fetch-mock'
@@ -8,7 +8,7 @@ import fetchMock from 'fetch-mock'
 // Simply put, this should render our view
 it('renders without crashing', () => {
   const div = document.createElement('div')
-  ReactDOM.render(<App />, div)
+  ReactDOM.render(<Buscape />, div)
 })
 
 // Please notice async/await from here on
