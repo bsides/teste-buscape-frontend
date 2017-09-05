@@ -5090,7 +5090,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.5.10:
+prop-types@^15.5.10, prop-types@^15.5.8:
   version "15.5.10"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.5.10.tgz#2797dfc3126182e3a95e3dfbb2e893ddd7456154"
   dependencies:
@@ -5241,6 +5241,12 @@ react-error-overlay@^2.0.1:
     react-dom "^15 || ^16"
     settle-promise "1.0.0"
     source-map "0.5.6"
+
+react-image@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/react-image/-/react-image-1.0.1.tgz#eb3178a7b2a09945310a4bea6f89317d8b6f8c40"
+  dependencies:
+    prop-types "^15.5.8"
 
 react-scripts@1.0.13:
   version "1.0.13"
