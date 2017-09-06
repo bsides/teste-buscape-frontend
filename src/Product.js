@@ -32,7 +32,7 @@ class Product extends Component {
     return (
       <form onSubmit={this.sendToCart}>
         <div className="row product bg-white">
-          <div className="col">
+          <div className="col-sm-2">
             {images.map((image, index) => (
               <ProductImage
                 image={image}
@@ -43,7 +43,8 @@ class Product extends Component {
               />
             ))}
           </div>
-          <div className="col">
+
+          <div className="col-sm-5 justify-content-center">
             <div className="image-selected">
               <img
                 src={this.state.selected.src || images[0]}
@@ -51,7 +52,8 @@ class Product extends Component {
               />
             </div>
           </div>
-          <div className="col">
+
+          <div className="col-sm-5">
             <div className="title">{name}</div>
             <div className="best-offer">
               <span
@@ -63,7 +65,7 @@ class Product extends Component {
               </span>
             </div>
             <div className="row">
-              <div className="col">
+              <div className="col product-price">
                 <span className="price installments">
                   {price.installments}x
                 </span>
