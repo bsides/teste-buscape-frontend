@@ -54,7 +54,13 @@ class Product extends Component {
           <div className="col">
             <div className="title">{name}</div>
             <div className="best-offer">
-              <span className="badge badge-primary">Melhor preço</span>
+              <span
+                className={`badge badge-primary${Math.random() >= 0.5
+                  ? ' d-none'
+                  : ''}`}
+              >
+                Melhor preço
+              </span>
             </div>
             <div className="row">
               <div className="col">
