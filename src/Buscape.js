@@ -10,6 +10,16 @@ class Buscape extends Component {
     items: [],
     cart: []
   }
+  componentWillMount() {
+    const persistCart = localStorage.getItem('testebuscapefe')
+    if (!persistCart) {
+      const cart = this.state.cart
+      localStorage.setItem('testebuscapefe', JSON.stringify(cart))
+    } else {
+      const cart = JSON.parse(persistCart)
+      this.setState({ cart })
+    }
+  }
   componentDidMount() {
     this.fetchProducts()
   }
@@ -35,9 +45,16 @@ class Buscape extends Component {
       })
     }
 
-    this.setState({
-      cart: updatedCart
-    })
+    this.setState({ cart: updatedCart })
+
+    localStorage.setItem('testebuscapefe', JSON.stringify(updatedCart))
+  }
+  removeFromCart = productId => {
+    let updatedCart = this.state.cart.filter(item => item.id !== productId)
+
+    this.setState({ cart: updatedCart })
+
+    localStorage.setItem('testebuscapefe', JSON.stringify(updatedCart))
   }
   async fetchProducts() {
     // just to be easier to locate this variable
@@ -46,12 +63,12 @@ class Buscape extends Component {
 
     const response = await fetch(url)
     const result = await response.json()
-    this.setState({ ...result })
+    return result
   }
   render() {
     return (
       <div>
-        <Header data={this.state.cart} />
+        <Header data={this.state.cart} removeFromCart={this.removeFromCart} />
         <div className="container">
           {this.state.items.map((item, index) => {
             return (
