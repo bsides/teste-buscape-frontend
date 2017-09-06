@@ -46,9 +46,10 @@ class Product extends Component {
 
           <div className="col-sm-5 justify-content-center">
             <div className="image-selected">
-              <img
+              <Img
                 src={this.state.selected.src || images[0]}
                 alt={this.state.selected.alt || name}
+                className="img-fluid"
               />
             </div>
           </div>
@@ -58,7 +59,7 @@ class Product extends Component {
             <div className="best-offer">
               <span
                 className={`badge badge-primary${Math.random() >= 0.5
-                  ? ' d-none'
+                  ? ' invisible'
                   : ''}`}
               >
                 Melhor preço
@@ -107,7 +108,7 @@ ProductImage.propTypes = {
 function ProductImage({ image, alt, selectImage, isSelected }) {
   return (
     <button
-      className={`mini img-thumbnail${isSelected ? ' highlight' : ''}`}
+      className={`btn mini img-thumbnail${isSelected ? ' highlight' : ''}`}
       type="button"
       onClick={selectImage}
     >

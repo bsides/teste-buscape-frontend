@@ -30,6 +30,7 @@ class Buscape extends Component {
         id: item.id,
         name: item.name,
         price: item.price,
+        src: item.images[0],
         quantity: 1
       })
     }
@@ -50,7 +51,7 @@ class Buscape extends Component {
   render() {
     return (
       <div>
-        <Header />
+        <Header data={this.state.cart} />
         <div className="container">
           {this.state.items.map((item, index) => {
             return (
