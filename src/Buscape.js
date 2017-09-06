@@ -59,7 +59,7 @@ class Buscape extends Component {
   async fetchProducts() {
     // just to be easier to locate this variable
     const url =
-      'https://raw.githubusercontent.com/bsides/exercicios/master/frontend/resources/data.json'
+      'https://raw.githubusercontent.com/bsides/teste-buscape-frontend/master/src/api/data.json'
 
     const response = await fetch(url)
     const result = await response.json()
