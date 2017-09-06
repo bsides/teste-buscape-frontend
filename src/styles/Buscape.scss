@@ -36,6 +36,8 @@ $bg-cart: #daaf00;
   cursor: pointer;
 }
 .header {
+  position: relative;
+
   .btn {
     background: transparent;
   }
@@ -43,18 +45,7 @@ $bg-cart: #daaf00;
 .bg-yellow {
   background-color: $yellow;
 }
-.product {
-  max-height: 480px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  border-radius: 0.5em;
-  padding: 30px 20px;
-  box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.1);
 
-  .title {
-    font-size: $h2-font-size;
-  }
-}
 .mini {
   max-width: 100px;
   max-height: 100px;
@@ -78,11 +69,19 @@ $bg-cart: #daaf00;
   border-width: 2px;
 }
 
-.title {
-  border-bottom: 1px solid $productbar;
-  padding-bottom: 16px;
-}
 .product {
+  max-height: 480px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 0.5em;
+  padding: 30px 20px;
+  box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.1);
+
+  .title {
+    font-size: $h2-font-size;
+    border-bottom: 1px solid $productbar;
+    padding-bottom: 16px;
+  }
   .btn-success {
     margin-top: 12px;
   }
@@ -123,9 +122,34 @@ $bg-cart: #daaf00;
   font-size: $h1-font-size;
 }
 
+// Cart
+.cart-wrapper {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+  z-index: 1;
+}
 .cart {
   background: $bg-cart;
   font-size: $font-size-lg;
+  position: relative;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    background: linear-gradient(to bottom, #ffcd00 0px, #c49d00 5px);
+    height: 5px;
+    width: 100%;
+  }
+  &:after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    background: $bg-cart;
+    height: 3px;
+    width: 100%;
+  }
 }
 .cart-item {
   background: $bg-cart-darker;
@@ -147,6 +171,22 @@ $bg-cart: #daaf00;
 }
 .cart-name {
   color: $white;
+}
+.cart-subtotal {
+  color: $black;
+  padding: 1em;
+
+  .title {
+    border-bottom: 1px solid $black;
+  }
+  .price {
+    color: $black;
+  }
+  .installments,
+  .currency,
+  .installment {
+    font-size: $font-size-lg;
+  }
 }
 
 .octicon {

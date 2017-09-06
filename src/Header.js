@@ -1,84 +1,137 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { array } from 'prop-types'
 
 import logosvg from './images/logo-buscape.svg'
 import logo from './images/buscape.png'
 
-Header.propTypes = {
-  badge: array
-}
-
-function Header(props) {
-  const { data } = props
-  const badge = data || []
-  console.log(data)
-  return (
-    <header className="bg-yellow header">
-      <div className="container">
-        <nav className="navbar navbar-light bg-yellow justify-content-between">
-          <a className="navbar-brand">
-            <img alt="Buscapé logo" srcSet={logosvg} src={logo} />
-          </a>
-          <button type="button" className="btn">
-            <span dangerouslySetInnerHTML={menuIcon()} />
-            <span
-              className={`badge badge-pill badge-danger${badge.length > 0
-                ? ' visible'
-                : ' invisible'}`}
-            >
-              {badge.length}
-            </span>
-          </button>
-        </nav>
-      </div>
-      <div className="container cart-wrapper">
-        <div className="cart">
-          <ul className="list-unstyled">
-            {data.length > 0 &&
-              data.map((product, i) => {
-                return (
-                  <li className="media cart-item" key={i}>
-                    <div className="cart-image">
-                      <img
-                        className="d-flex mr-3 img-fluid"
-                        src={product.src}
-                        alt=""
-                      />
-                    </div>
-                    <div className="media-body">
-                      <h5 className="mt-0 mb-1 cart-name">{product.name}</h5>
-                      <span className="price installments">
-                        {product.price.installments}x
-                      </span>
-                      <span className="price currency"> R$ </span>
-                      <span className="price installment">
-                        {new Intl.NumberFormat('pt-BR', {
-                          minimumFractionDigits: 2,
-                          maximumFractionDigits: 2
-                        }).format(product.price.installmentValue)}
-                      </span>
-                      <div>
-                        ou <span className="price">R$ </span>
-                        <span className="price value">
+class Header extends Component {
+  static propTypes = {
+    data: array
+  }
+  state = {
+    menu: false
+  }
+  toggleMenu = () => {
+    const menu = !this.state.menu
+    this.setState({ menu })
+  }
+  removeFromCart = productId => {
+    this.props.removeFromCart(productId)
+  }
+  render() {
+    const { data } = this.props
+    const badge = data || []
+    const subTotal = {
+      value: data
+        .map(item => item.price.value)
+        .reduce((prev, cur) => prev + cur, 0),
+      installments: 10,
+      installmentValue() {
+        return this.value / this.installments
+      }
+    }
+    return (
+      <header className="bg-yellow header">
+        <div className="container">
+          <nav className="navbar navbar-light bg-yellow justify-content-between">
+            <a className="navbar-brand">
+              <img alt="Buscapé logo" srcSet={logosvg} src={logo} />
+            </a>
+            <button type="button" className="btn" onClick={this.toggleMenu}>
+              <span dangerouslySetInnerHTML={menuIcon()} />
+              <span
+                className={`badge badge-pill badge-danger${badge.length > 0
+                  ? ' visible'
+                  : ' invisible'}`}
+              >
+                {badge.length}
+              </span>
+            </button>
+          </nav>
+        </div>
+        <div
+          className={`container cart-wrapper${this.state.menu &&
+          subTotal.value > 0
+            ? ''
+            : ' invisible'}`}
+        >
+          <div className="cart">
+            <ul className="list-unstyled">
+              {data.length > 0 &&
+                data.map((product, i) => {
+                  return (
+                    <li className="media cart-item" key={i}>
+                      <div className="cart-image">
+                        <img
+                          className="d-flex mr-3 img-fluid"
+                          src={product.src}
+                          alt=""
+                        />
+                      </div>
+                      <div className="media-body">
+                        <h5 className="mt-0 mb-1 cart-name">{product.name}</h5>
+                        <span className="price installments">
+                          {product.price.installments}x
+                        </span>
+                        <span className="price currency"> R$ </span>
+                        <span className="price installment">
                           {new Intl.NumberFormat('pt-BR', {
                             minimumFractionDigits: 2,
                             maximumFractionDigits: 2
-                          }).format(product.price.value)}
-                        </span>{' '}
-                        à vista
+                          }).format(product.price.installmentValue)}
+                        </span>
+                        <div>
+                          ou <span className="price">R$ </span>
+                          <span className="price value">
+                            {new Intl.NumberFormat('pt-BR', {
+                              minimumFractionDigits: 2,
+                              maximumFractionDigits: 2
+                            }).format(product.price.value)}
+                          </span>{' '}
+                          à vista
+                        </div>
                       </div>
-                    </div>
-                    <button type="button" className="btn font-weight-bold">
-                      X
-                    </button>
-                  </li>
-                )
-              })}
-          </ul>
+                      <button
+                        type="button"
+                        className="btn font-weight-bold"
+                        onClick={() => this.removeFromCart(product.id)}
+                      >
+                        X
+                      </button>
+                    </li>
+                  )
+                })}
+            </ul>
+            <div className="cart-subtotal text-right">
+              <div className="title">subtotal</div>
+              <div>
+                <span className="price installments">
+                  {subTotal.installments}x
+                </span>
+                <span className="price currency"> R$ </span>
+                <span className="price installment">
+                  {new Intl.NumberFormat('pt-BR', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                  }).format(subTotal.installmentValue())}
+                </span>
+                <div>
+                  ou <span className="price">R$ </span>
+                  <span className="price value">
+                    {new Intl.NumberFormat('pt-BR', {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2
+                    }).format(subTotal.value)}
+                  </span>{' '}
+                  à vista
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </header>
-  )
+      </header>
+    )
+  }
 }
 
 function menuIcon() {
